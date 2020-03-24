@@ -41,6 +41,7 @@ public:
     Vector2i scaledImageSize() const { return (mScale * mImageSize.cast<float>()).cast<int>(); }
     Vector2f imageSizeF() const { return mImageSize.cast<float>(); }
     Vector2f scaledImageSizeF() const { return (mScale * mImageSize.cast<float>()); }
+    void rescaleImage(float factor) { mImageSize *= factor; }
 
     const Vector2f& offset() const { return mOffset; }
     void setOffset(const Vector2f& offset) { mOffset = offset; }
@@ -132,6 +133,8 @@ public:
     void performLayout(NVGcontext* ctx) override;
     void draw(NVGcontext* ctx) override;
 
+    void setWindowScale(float scale) { mWindowScale = scale; }
+
 private:
     // Helper image methods.
     void updateImageParameters();
@@ -156,6 +159,8 @@ private:
     Vector2f mOffset;
     bool mFixedScale;
     bool mFixedOffset;
+
+    float mWindowScale;
 
     // Fine-tuning parameters.
     float mZoomSensitivity = 1.1f;

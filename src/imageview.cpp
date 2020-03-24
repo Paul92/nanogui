@@ -68,7 +68,8 @@ namespace {
 
 ImageView::ImageView(Widget* parent, GLuint imageID)
     : Widget(parent), mImageID(imageID), mScale(1.0f), mOffset(Vector2f::Zero()),
-    mFixedScale(false), mFixedOffset(false), mPixelInfoCallback(nullptr) {
+    mFixedScale(false), mFixedOffset(false), mPixelInfoCallback(nullptr),
+    mWindowScale(1.0f) {
     updateImageParameters();
     mShader.init("ImageViewShader", defaultImageViewVertexShader,
                  defaultImageViewFragmentShader);
@@ -324,7 +325,7 @@ void ImageView::updateImageParameters() {
     GLint w, h;
     glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
     glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
-    mImageSize = Vector2i(w, h);
+    mImageSize = (Vector2f(w, h) * mWindowScale).cast<int>();
 }
 
 void ImageView::drawWidgetBorder(NVGcontext* ctx) const {
