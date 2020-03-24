@@ -354,6 +354,10 @@ public:
     void downloadAttrib(const std::string &name, size_t size, int dim,
                        uint32_t compSize, GLuint glType, void *data);
 
+    /// The OpenGL program (as returned by ``glCreateProgram``).
+    GLuint mProgramShader;
+
+
 protected:
     /// The registered name of this GLShader.
     std::string mName;
@@ -366,9 +370,6 @@ protected:
 
     /// The geometry shader (if requested) of this GLShader (as returned by ``glCreateShader``).
     GLuint mGeometryShader;
-
-    /// The OpenGL program (as returned by ``glCreateProgram``).
-    GLuint mProgramShader;
 
     /// The vertex array associated with this GLShader (as returned by ``glGenVertexArrays``).
     GLuint mVertexArrayObject;
